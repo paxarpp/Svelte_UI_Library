@@ -36,4 +36,10 @@ export const button_large_danger = () => ({
   on: { click: action('clicked') },
 });
 
+export const button_small_secondary_disabled = () => ({
+  Component: Flat,
+  props: { text: 'small', size: 'SMALL', type: 'SECONDARY', disabled: true },
+  on: { click: action('clicked') },
+});
+
 

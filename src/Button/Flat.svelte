@@ -1,4 +1,4 @@
-<button class="button {setedSize} {settedType}" on:click={onClick}>
+<button class="button {settedSize} {settedType} {disabled ? 'DISABLED' : ''}" on:click={!disabled ? onClick: null}>
     {text}
 </button>
 
@@ -81,13 +81,13 @@
     transform: scale(1, 1) translate(-50%);
     transform-origin: 50% 50%;
   }
-  .PRIMARY:focus:not(:active):after {
+  .PRIMARY:not(.DISABLED):focus:not(:active):after {
     animation: ripple 0.5s ease-out;
   }
-  .SECONDARY:focus:not(:active):after {
+  .SECONDARY:not(.DISABLED):focus:not(:active):after {
     animation: rippleSec 0.5s ease-out;
   }
-  .DANGER:focus:not(:active):after {
+  .DANGER:not(.DISABLED):focus:not(:active):after {
     animation: rippleDng 0.5s ease-out;
   }
   .NORMAL {
@@ -102,15 +102,20 @@
     height: 20px;
     line-height: 20px;
   }
+  .DISABLED {
+    cursor: default;
+    background-color: rgba(29, 29, 29, 0.1);
+  }
 </style>
 
 <script>
   import { createEventDispatcher } from 'svelte';
   export let text = '';
+  export let disabled = false;
   export let size = 'NORMAL';
   export let type = 'PRIMARY';
   const sizes = new Set(['NORMAL', 'LARGE', 'SMALL']);
-  const setedSize = sizes.has(size) ? size : 'NORMAL';
+  const settedSize = sizes.has(size) ? size : 'NORMAL';
   const types = new Set(['PRIMARY', 'SECONDARY', 'DANGER']);
   const settedType = types.has(type) ? type : 'PRIMARY';
   const dispatch = createEventDispatcher();
