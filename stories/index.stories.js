@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 
-import { Flat } from '../src/Button';
+import { Flat, Primary } from '../src/Button';
 
 export default {
   title: 'Button',
@@ -39,6 +39,12 @@ export const button_large_danger = () => ({
 export const button_small_secondary_disabled = () => ({
   Component: Flat,
   props: { text: 'small', size: 'SMALL', type: 'SECONDARY', disabled: true },
+  on: { click: action('clicked') },
+});
+
+export const button_Primary = () => ({
+  Component: Primary,
+  props: { text: 'Primary' },
   on: { click: action('clicked') },
 });
 
